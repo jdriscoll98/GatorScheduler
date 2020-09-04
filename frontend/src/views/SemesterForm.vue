@@ -1193,7 +1193,7 @@ export default {
       }
     },
     fetchCourses: function() {
-      fetch("http://localhost:8000/api/fetch/", {
+      fetch("/api/fetch/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

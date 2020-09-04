@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <SemesterCard v-for="semester in semesters" :key="semester.id" :semester="semester"></SemesterCard>
+    <SemesterCard v-for="semester in semesters" :key="semester.number" :semester="semester"></SemesterCard>
     <div v-if="semesters.length == 0" class="empty">
       <h3 class="heading">No Semesters Added Yet!</h3>
     </div>
@@ -20,7 +20,9 @@ export default {
   },
   computed: {
     semesters: function () {
-      return this.$store.state.semesters;
+      return this.$store.state.semesters.sort((a, b) =>
+        a.number > b.number ? 1 : -1
+      );
     },
     programs: function () {
       return this.$store.state.programs;

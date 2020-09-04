@@ -40,7 +40,7 @@ export default createStore({
       localStorage.clear();
     },
     setAuthError(state, data) {
-      state.authError = data;
+      state.authError.error = data.non_field_errors[0];
       state.errors = true;
     },
     registered(state) {
@@ -97,7 +97,7 @@ export default createStore({
   },
   actions: {
     getPrograms({ commit }) {
-      return fetch("http://localhost:8000/api/programs/", {
+      return fetch("/api/programs/", {
         method: "get",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -108,7 +108,7 @@ export default createStore({
         })
     },
     createSemester({ commit }, payload) {
-      return fetch("http://localhost:8000/api/semesters/", {
+      return fetch("/api/semesters/", {
         method: "post",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -128,7 +128,7 @@ export default createStore({
         })
     },
     updateSemester({ commit }, payload) {
-      return fetch(`http://localhost:8000/api/semesters/${payload.id}`, {
+      return fetch(`/api/semesters/${payload.id}`, {
         method: "put",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -147,7 +147,7 @@ export default createStore({
       })
     },
     deleteSemester({ commit }, id) {
-      return fetch(`http://localhost:8000/api/semesters/${id}`, {
+      return fetch(`/api/semesters/${id}`, {
         method: "delete",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -165,7 +165,7 @@ export default createStore({
       })
     },
     getSemesters({ commit }) {
-      return fetch("http://localhost:8000/api/semesters/", {
+      return fetch("/api/semesters/", {
         method: "get",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -177,7 +177,7 @@ export default createStore({
     },
 
     getCategories() {
-      return fetch("http://localhost:8000/api/categories/", {
+      return fetch("/api/categories/", {
         method: "get",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -188,7 +188,7 @@ export default createStore({
         })
     },
     login({ commit }, payload) {
-      return fetch("http://localhost:8000/api/login/", {
+      return fetch("/api/login/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -202,6 +202,7 @@ export default createStore({
             commit('login', response)
           }
           else {
+            console.log(response)
             commit('setAuthError', response)
           }
           return response;
@@ -209,7 +210,7 @@ export default createStore({
     },
 
     register({ commit }, payload) {
-      return fetch("http://localhost:8000/api/register/", {
+      return fetch("/api/register/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -218,12 +219,13 @@ export default createStore({
       })
         .then(response => response.json())
         .then(response => {
+          console.log(response)
           commit("registered")
           return response;
         })
     },
     uploadAudit({ commit }, payload) {
-      return fetch("http://localhost:8000/api/upload/", {
+      return fetch("/api/upload/", {
         method: "post",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),

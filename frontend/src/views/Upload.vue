@@ -4,9 +4,10 @@
       <h3 class="heading errors" id="errors"></h3>
     </div>
     <div v-if="!extensionLoaded">
-      <h1 class="heading" id="install-warning">
-        This app requires the Gator-Scheduler extension to be installed
-      </h1>
+      <h1
+        class="heading"
+        id="install-warning"
+      >This app requires the Gator-Scheduler extension to be installed</h1>
 
       <button
         @click="
@@ -15,31 +16,17 @@
           )
         "
         class="extension-btn"
-      >
-        Go to Chrome Extension
-      </button>
+      >Go to Chrome Extension</button>
     </div>
     <div v-else>
       <div v-if="this.auditLoaded">
-        <h3 class="heading" id="upload-heading">
-          Audit Successfully Loaded
-        </h3>
-        <button
-          class="upload-btn"
-          @click="uploadAudit()"
-          v-if="this.auditLoaded"
-        >
-          Upload Data
-        </button>
+        <h3 class="heading" id="upload-heading">Audit Successfully Loaded</h3>
+        <button class="upload-btn" @click="uploadAudit()" v-if="this.auditLoaded">Upload Data</button>
         <div class="loader" id="loader"></div>
       </div>
       <div v-else>
-        <h3 class="heading" id="pre-upload">
-          Extension Successfully Loaded
-        </h3>
-        <button @click="fetchData" class="upload-btn">
-          Fetch Degree Audit
-        </button>
+        <h3 class="heading" id="pre-upload">Extension Successfully Loaded</h3>
+        <button @click="fetchData" class="upload-btn">Fetch Degree Audit</button>
       </div>
     </div>
   </div>
@@ -48,7 +35,7 @@
 <script>
 export default {
   name: "Upload",
-  data: function() {
+  data: function () {
     return {
       auditLoaded: false,
       extensionLoaded: false,
@@ -67,28 +54,28 @@ export default {
       var img;
       img = new Image();
       img.src = "chrome-extension://kmimdoenmlpjipeandldklbjjfbabojd/test.png";
-      img.onload = function() {
+      img.onload = function () {
         callback(true);
       };
-      img.onerror = function() {
+      img.onerror = function () {
         callback(false);
       };
     },
     setExtensionValue(value) {
       this.extensionLoaded = value;
     },
-    fetchData: function() {
+    fetchData: function () {
       window.open("https://one.uf.edu/degreeaudit");
       this.auditLoaded = true;
       let errors = document.getElementById("errors");
       errors.innerText = "";
     },
-    openPage: function(url) {
+    openPage: function (url) {
       window.open(url);
       let notice = document.getElementById("install-warning");
       notice.innerText = "Refresh to recheck for extension";
     },
-    uploadAudit: function() {
+    uploadAudit: function () {
       let data = JSON.parse(localStorage.getItem("audit"));
       if (!data || !data.audit) {
         this.auditLoaded = false;
