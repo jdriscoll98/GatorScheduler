@@ -329,7 +329,7 @@ export default {
     display: block;
   }
   .nav-item {
-    font-size: 4vw;
+    font-size: 3vw;
   }
   .desktop-only {
     display: none;
