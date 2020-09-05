@@ -139,8 +139,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
     "http://127.0.0.1:8000",
     "http://127.0.0.1:8000",
-    "https://planmycourses.com/",
-    "https://www.planmycourses.com/",
+    "https://planmycourses.com",
+    "https://www.planmycourses.com",
 ]  # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
 CORS_ORIGIN_REGEX_WHITELIST = [
     "http://localhost:8080",
