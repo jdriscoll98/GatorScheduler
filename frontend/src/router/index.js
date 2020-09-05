@@ -49,7 +49,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && to.name !== "Register" && !store.state.loggedIn) next({ name: 'Login' })
-  else if (store.state.loggedIn && to.name !== "Upload" && store.state.programs.length == 0) next({ name: 'Upload' })
+  else if (store.state.loggedIn && to.name !== "Upload" && to.name !== "Overview" && store.state.programs.length == 0) next({ name: 'Upload' })
   else next()
 })
 
